@@ -1,0 +1,266 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>第一届古气候模拟暑期学校实习记录 | leapfrog's blog</title><meta name="author" content="李朋发"><meta name="copyright" content="李朋发"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="本文档记录了第一届古气候模拟暑期学校的实习过程，涵盖高性能计算环境的接入、CESM模式的使用与实验设计等内容。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第一届古气候模拟暑期学校实习记录">
+<meta property="og:url" content="http://example.com/2025/08/01/research/paleomodel_learn/index.html">
+<meta property="og:site_name" content="leapfrog&#39;s blog">
+<meta property="og:description" content="本文档记录了第一届古气候模拟暑期学校的实习过程，涵盖高性能计算环境的接入、CESM模式的使用与实验设计等内容。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/Summer_School_of_Paleoclimate_Simulation.jpg">
+<meta property="article:published_time" content="2025-07-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-07-31T14:34:44.214Z">
+<meta property="article:author" content="李朋发">
+<meta property="article:tag" content="古气候模拟">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/Summer_School_of_Paleoclimate_Simulation.jpg"><script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "第一届古气候模拟暑期学校实习记录",
+  "url": "http://example.com/2025/08/01/research/paleomodel_learn/",
+  "image": "https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/Summer_School_of_Paleoclimate_Simulation.jpg",
+  "datePublished": "2025-07-31T16:00:00.000Z",
+  "dateModified": "2025-07-31T14:34:44.214Z",
+  "author": [
+    {
+      "@type": "Person",
+      "name": "李朋发",
+      "url": "http://example.com"
+    }
+  ]
+}</script><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://example.com/2025/08/01/research/paleomodel_learn/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//fonts.googleapis.com" crossorigin=""/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@600&amp;display=swap" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyloadPlugin: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '第一届古气候模拟暑期学校实习记录',
+  isHighlightShrink: false,
+  isToc: true,
+  pageType: 'post'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/my_picture.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">全部文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">文章标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">文章分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间线</span></a></div><div class="menus_item"><a class="site-page" href="/image/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 更多</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/Summer_School_of_Paleoclimate_Simulation.jpg);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">leapfrog's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">第一届古气候模拟暑期学校实习记录</span><span class="site-name"><i class="fa-solid fa-circle-arrow-left"></i><span>  返回首页</span></span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间线</span></a></div><div class="menus_item"><a class="site-page" href="/image/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> 更多</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">第一届古气候模拟暑期学校实习记录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-07-31T16:00:00.000Z" title="发表于 2025-08-01 00:00:00">2025-08-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-07-31T14:34:44.214Z" title="更新于 2025-07-31 22:34:44">2025-07-31</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%A7%91%E7%A0%94/">科研</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><h1 id="第一届古气候模拟暑期学校"><a href="#第一届古气候模拟暑期学校" class="headerlink" title=" 第一届古气候模拟暑期学校"></a><p align="center"> 第一届古气候模拟暑期学校</p></h1><p align="center"> 实习记录 by 李朋发（2025-7-8）</p>
+
+
+
+
+<h2 id="1-连接HPC（高性能计算机）"><a href="#1-连接HPC（高性能计算机）" class="headerlink" title="1. 连接HPC（高性能计算机）"></a>1. 连接HPC（高性能计算机）</h2><h3 id="1-1-Xshell接入超算"><a href="#1-1-Xshell接入超算" class="headerlink" title="1.1 Xshell接入超算"></a>1.1 Xshell接入超算</h3><ol>
+<li>自定义连接名称（中科）</li>
+<li>ssh命令连接主机</li>
+<li>默认端口号</li>
+</ol>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image.png" alt="alt text"></p>
+<ul>
+<li>输入用户名和密码</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-1.png" alt="alt text"></p>
+<h3 id="1-2-Xftp建立超算与自己电脑的文件传输连接"><a href="#1-2-Xftp建立超算与自己电脑的文件传输连接" class="headerlink" title="1.2 Xftp建立超算与自己电脑的文件传输连接"></a>1.2 Xftp建立超算与自己电脑的文件传输连接</h3><p align="center">
+  <img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-3.png" width="92%">
+</p>
+
+<hr>
+<h2 id="2-查看地球系统模式（CESM）的文件结构"><a href="#2-查看地球系统模式（CESM）的文件结构" class="headerlink" title="2. 查看地球系统模式（CESM）的文件结构"></a>2. 查看地球系统模式（CESM）的文件结构</h2><h3 id="2-1-主目录文件夹查看"><a href="#2-1-主目录文件夹查看" class="headerlink" title="2.1 主目录文件夹查看"></a>2.1 主目录文件夹查看</h3><p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-4.png" alt="alt text"></p>
+<h3 id="2-2-新建文件夹，进入和退出"><a href="#2-2-新建文件夹，进入和退出" class="headerlink" title="2.2 新建文件夹，进入和退出"></a>2.2 新建文件夹，进入和退出</h3><p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-6.png" alt="alt text"></p>
+<h3 id="2-3-进入cesm1-2-2并查看目录结构"><a href="#2-3-进入cesm1-2-2并查看目录结构" class="headerlink" title="2.3 进入cesm1_2_2并查看目录结构"></a>2.3 进入cesm1_2_2并查看目录结构</h3><p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-7.png" alt="alt text"></p>
+<h3 id="2-4-进入models并查看目录结构"><a href="#2-4-进入models并查看目录结构" class="headerlink" title="2.4 进入models并查看目录结构"></a>2.4 进入models并查看目录结构</h3><p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-8.png" alt="alt text"></p>
+<h3 id="2-5-进入大气模式目录并查看"><a href="#2-5-进入大气模式目录并查看" class="headerlink" title="2.5 进入大气模式目录并查看"></a>2.5 进入大气模式目录并查看</h3><p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-9.png" alt="alt text"></p>
+<hr>
+<h2 id="3-设计实验"><a href="#3-设计实验" class="headerlink" title="3. 设计实验"></a>3. 设计实验</h2><h3 id="3-1-牛刀小试"><a href="#3-1-牛刀小试" class="headerlink" title="3.1 牛刀小试"></a>3.1 牛刀小试</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入目录</span></span><br><span class="line"><span class="built_in">cd</span> /public23/home/a21001320/cesm1_2_2/scripts</span><br><span class="line"><span class="comment"># 创建新case</span></span><br><span class="line">./create_newcase -<span class="keyword">case</span> ~/lipengfa/cases/test_lpf.testF1850</span><br><span class="line"> -res f19_g16 -compset F1850 -mach bscca21</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-10.png" alt="alt text"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入刚刚创建的文件</span></span><br><span class="line"><span class="built_in">cd</span> /public23/home/a21001320/lipengfa/</span><br><span class="line">cases/test_lpf.testF1850</span><br><span class="line"><span class="comment"># 安装CESM模型</span></span><br><span class="line">./cesm_setup</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-11.png" alt="alt text"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建可执行文件</span></span><br><span class="line">./test_lpf.testF1850.build</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-12.png" alt="alt text"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 提交运行任务</span></span><br><span class="line">sbatch test_lpf.testF1850.run</span><br><span class="line"><span class="comment"># 查看任务队列</span></span><br><span class="line">squeue</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-13.png" alt="alt text"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看输出文件</span></span><br><span class="line"><span class="built_in">cd</span> ~/cesmcasedata/archive/test_lpf.testF1850</span><br></pre></td></tr></table></figure>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-14.png" width="80%">
+</p>
+
+<ul>
+<li>使用Panoply软件进行可视化</li>
+</ul>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-15.png" width="80%">
+</p>
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-16.png" width="80%">
+</p>
+
+<h3 id="3-2-连续积分一个月"><a href="#3-2-连续积分一个月" class="headerlink" title="3.2 连续积分一个月"></a>3.2 连续积分一个月</h3><p><em>上一步仅仅运行了五天的样本，这里我们通过修改‘env_run.xml’配置文件，将积分时间增加到1个月</em></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看运行配置文件，i编辑，w写入保存，q退出</span></span><br><span class="line">vi env_run.xml</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-17.png" alt="alt text"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 再次提交任务并查看运行结果</span></span><br><span class="line">sbatch test_lpf.testF1850.run</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这里运行了1年，大概花费5元（人民币）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-18.png" alt="alt text"></p>
+<ul>
+<li>通过xftp下载到本地</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-19.png" alt="alt text"></p>
+<ul>
+<li>在Panoply中打开</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-20.png" alt="alt text"><br><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-21.png" alt="alt text"></p>
+<hr>
+<h3 id="3-3-修改CO2条件再运行（将默认的280ppm浓度修改为560ppm）"><a href="#3-3-修改CO2条件再运行（将默认的280ppm浓度修改为560ppm）" class="headerlink" title="3.3 修改CO2条件再运行（将默认的280ppm浓度修改为560ppm）"></a>3.3 修改CO2条件再运行（将默认的280ppm浓度修改为560ppm）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入脚本文件夹</span></span><br><span class="line"><span class="built_in">cd</span> /public23/home/a21001320/cesm1_2_2/scripts</span><br><span class="line"><span class="comment"># 创建新的脚本文件，运行CO2（CO2_560_lpf.testF1850）</span></span><br><span class="line">./create_newcase -<span class="keyword">case</span> ~/lipengfa/cases/CO2_560_lpf.testF1850 </span><br><span class="line">-res f19_g16 -compset F1850 -mach bscca21</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-22.png" alt="alt text"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入刚刚创建的文件</span></span><br><span class="line"><span class="built_in">cd</span> /public23/home/a21001320/lipengfa/cases/ </span><br><span class="line">CO2_560_lpf.testF1850</span><br><span class="line"><span class="comment"># 安装cesm</span></span><br><span class="line">./cesm_setup</span><br><span class="line"><span class="comment"># 进入CESM的参考文档</span></span><br><span class="line"><span class="built_in">cd</span> CaseDocs</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-23.png" alt="alt text"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 输入如下命令查看CO2修改的语法结构，本文件不做修改</span></span><br><span class="line">vi atm_in</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-24.png" alt="alt text"></p>
+<ul>
+<li>即获取‘co2vmr         &#x3D; 560e-6‘的写法格式</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入脚本空间</span></span><br><span class="line"><span class="built_in">cd</span> /public23/home/a21001320/lipengfa/cases/</span><br><span class="line">CO2_560_lpf.testF1850</span><br><span class="line"><span class="comment"># 写入user_nl_cam</span></span><br><span class="line">Vi user_nl_cam</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-25.png" alt="alt text"><br><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-26.png" alt="alt text"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 再次运行</span></span><br><span class="line"><span class="comment"># 创建可执行文件</span></span><br><span class="line">./CO2_560_lpf.testF1850.build</span><br><span class="line"><span class="comment"># 提交运行任务</span></span><br><span class="line">sbatch CO2_560_lpf.testF1850.run</span><br><span class="line"><span class="comment"># 查看任务队列</span></span><br><span class="line">squeue</span><br></pre></td></tr></table></figure>
+<ul>
+<li>560ppmCO2场景-280ppmCO2场景（2m温度）</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-28.png" alt="alt text"></p>
+<hr>
+<h3 id="3-4-其他边界条件修改（时间原因没有实践）"><a href="#3-4-其他边界条件修改（时间原因没有实践）" class="headerlink" title="3.4 其他边界条件修改（时间原因没有实践）"></a>3.4 其他边界条件修改（时间原因没有实践）</h3><ul>
+<li><em>太阳常数</em></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-29.png" alt="alt text">  </p>
+<ul>
+<li><em>轨道参数</em></li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-30.png" alt="alt text"></p>
+<hr>
+<h3 id="3-5-修改赤道太平洋海温条件"><a href="#3-5-修改赤道太平洋海温条件" class="headerlink" title="3.5 修改赤道太平洋海温条件"></a>3.5 修改赤道太平洋海温条件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 返回主目录</span></span><br><span class="line"><span class="built_in">cd</span> </span><br><span class="line"><span class="comment"># 进入自己的文件夹</span></span><br><span class="line"><span class="built_in">cd</span> lipengfa</span><br><span class="line"><span class="comment"># 为方便管理创建文件夹</span></span><br><span class="line"><span class="built_in">mkdir</span> boundary</span><br><span class="line"><span class="built_in">mkdir</span> analysis</span><br><span class="line"><span class="comment"># 进入边界文件夹 创建两个子文件夹方便管理数据</span></span><br><span class="line"><span class="built_in">cd</span> boundary</span><br><span class="line"><span class="built_in">mkdir</span> data</span><br><span class="line">mkddir scripts</span><br><span class="line"><span class="comment"># 进入data文件夹</span></span><br><span class="line"><span class="built_in">cd</span> data</span><br><span class="line"><span class="comment"># 将海温文件（默认）复制到自己的文件夹</span></span><br><span class="line"><span class="built_in">cp</span> -r /public23/home/a21001320/inputdata/atm/cam/sst</span><br><span class="line">/sst_HadOIBl_bc_1x1_clim_pi_c101029.nc ./</span><br><span class="line"><span class="comment"># 使用NCL程序修改海温（+2摄氏度）</span></span><br><span class="line"><span class="built_in">cd</span> scripts</span><br><span class="line"><span class="comment"># 14行修改路径，15行修改文件名，37行调整改变海温的区域和幅度</span></span><br><span class="line"><span class="comment"># 这里修改了5S-5N 170W-120W 海温升高2℃</span></span><br><span class="line">vi create_sst_NINO34_plus2.ncl</span><br></pre></td></tr></table></figure>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/image-31.png" width="90%">
+</p>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 运行修改后的脚本文件</span></span><br><span class="line">ncl create_sst_NINO34_plus2.ncl</span><br><span class="line"><span class="comment"># 修改路径（使用自己编辑的海温做实验，392行）</span></span><br><span class="line">vi env_run.xml</span><br><span class="line"><span class="comment"># 创建可执行文件</span></span><br><span class="line">./test_lpf.testF1850.build</span><br><span class="line"><span class="comment"># 提交运行任务</span></span><br><span class="line">sbatch test_lpf.testF1850.run</span><br><span class="line"><span class="comment"># 查看任务队列</span></span><br><span class="line">squeue</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="4-后记"><a href="#4-后记" class="headerlink" title="4. 后记"></a>4. 后记</h2><ul>
+<li>李香钰老师将8学时的课程压缩到了一天，尽管很多东西东西都是浅尝辄止，但是上机学习的小实验实在增加了我继续学习古气候模拟的信心。</li>
+<li>另外，我也意识到，比起运行古气候模式的操作，古气候边界条件的设置更加困难且难以确定，需要依靠重建记录的发展。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://example.com">李朋发</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://example.com/2025/08/01/research/paleomodel_learn/">http://example.com/2025/08/01/research/paleomodel_learn/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="http://example.com" target="_blank">leapfrog's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%8F%A4%E6%B0%94%E5%80%99%E6%A8%A1%E6%8B%9F/">古气候模拟</a></div><div class="post-share"><div class="social-share" data-image="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/Summer_School_of_Paleoclimate_Simulation.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/07/31/index/" title="欢迎来到我的博客"><img class="cover" src="https://raw.githubusercontent.com/Thor987/mypic/img/img/lake.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">欢迎来到我的博客</div></div><div class="info-2"><div class="info-item-1">我的第一个帖子欢迎来到我的个人博客！这里主要分享我的生活点滴和科研心得。 在这里我会分享： 🔬 科研方法与心得 📚 学习笔记整理   🌍 生活感悟分享 💻 技术探索记录  📚 最近在读的书 《杀死一只知更鸟》  🎵 音乐推荐 希望有羽毛和翅膀  📧 联系方式 Email: pengfali@mail.ustc.edu.cn GitHub: Thor987 如果你想了解更多关于我的信息，请访问关于页面。  有趣的地理知识 你知道吗？Lake Toba（多巴湖）确实是世界上最大的火山湖，位于印度尼西亚苏门答腊岛北部。这个湖泊形成于约74,000年前的一次超级火山爆发。 图片来源：By Bisajunisa - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=118474144  </div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/my_picture.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">李朋发</div><div class="author-info-description">大胆假设，小心求证！</div><div class="site-data"><a href="/archives/"><div class="headline">全部文章</div><div class="length-num">2</div></a><a href="/tags/"><div class="headline">文章标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">文章分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Thor987"><i class="fab fa-github"></i><span>关注</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/Thor987" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="mailto:pengfali@mail.ustc.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a><a class="social-icon" href="https://huggingface.co/Ciallo0d00" target="_blank" title="HuggingFace"><i class="fas fa-robot" style="color: #FF9D00;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>网站公告</span></div><div class="announcement_content">欢迎来到我的个人博客！这里会不定时分享一些生活与科研心得，欢迎和我邮件联系。</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E5%B1%8A%E5%8F%A4%E6%B0%94%E5%80%99%E6%A8%A1%E6%8B%9F%E6%9A%91%E6%9C%9F%E5%AD%A6%E6%A0%A1"><span class="toc-number">1.</span> <span class="toc-text"> 第一届古气候模拟暑期学校</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E8%BF%9E%E6%8E%A5HPC%EF%BC%88%E9%AB%98%E6%80%A7%E8%83%BD%E8%AE%A1%E7%AE%97%E6%9C%BA%EF%BC%89"><span class="toc-number">1.1.</span> <span class="toc-text">1. 连接HPC（高性能计算机）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-Xshell%E6%8E%A5%E5%85%A5%E8%B6%85%E7%AE%97"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 Xshell接入超算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-Xftp%E5%BB%BA%E7%AB%8B%E8%B6%85%E7%AE%97%E4%B8%8E%E8%87%AA%E5%B7%B1%E7%94%B5%E8%84%91%E7%9A%84%E6%96%87%E4%BB%B6%E4%BC%A0%E8%BE%93%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 Xftp建立超算与自己电脑的文件传输连接</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%9F%A5%E7%9C%8B%E5%9C%B0%E7%90%83%E7%B3%BB%E7%BB%9F%E6%A8%A1%E5%BC%8F%EF%BC%88CESM%EF%BC%89%E7%9A%84%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">2. 查看地球系统模式（CESM）的文件结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%B8%BB%E7%9B%AE%E5%BD%95%E6%96%87%E4%BB%B6%E5%A4%B9%E6%9F%A5%E7%9C%8B"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 主目录文件夹查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%A4%B9%EF%BC%8C%E8%BF%9B%E5%85%A5%E5%92%8C%E9%80%80%E5%87%BA"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 新建文件夹，进入和退出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E8%BF%9B%E5%85%A5cesm1-2-2%E5%B9%B6%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 进入cesm1_2_2并查看目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E8%BF%9B%E5%85%A5models%E5%B9%B6%E6%9F%A5%E7%9C%8B%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.2.4.</span> <span class="toc-text">2.4 进入models并查看目录结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-%E8%BF%9B%E5%85%A5%E5%A4%A7%E6%B0%94%E6%A8%A1%E5%BC%8F%E7%9B%AE%E5%BD%95%E5%B9%B6%E6%9F%A5%E7%9C%8B"><span class="toc-number">1.2.5.</span> <span class="toc-text">2.5 进入大气模式目录并查看</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E8%AE%BE%E8%AE%A1%E5%AE%9E%E9%AA%8C"><span class="toc-number">1.3.</span> <span class="toc-text">3. 设计实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%89%9B%E5%88%80%E5%B0%8F%E8%AF%95"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 牛刀小试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E8%BF%9E%E7%BB%AD%E7%A7%AF%E5%88%86%E4%B8%80%E4%B8%AA%E6%9C%88"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 连续积分一个月</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E4%BF%AE%E6%94%B9CO2%E6%9D%A1%E4%BB%B6%E5%86%8D%E8%BF%90%E8%A1%8C%EF%BC%88%E5%B0%86%E9%BB%98%E8%AE%A4%E7%9A%84280ppm%E6%B5%93%E5%BA%A6%E4%BF%AE%E6%94%B9%E4%B8%BA560ppm%EF%BC%89"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3 修改CO2条件再运行（将默认的280ppm浓度修改为560ppm）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%85%B6%E4%BB%96%E8%BE%B9%E7%95%8C%E6%9D%A1%E4%BB%B6%E4%BF%AE%E6%94%B9%EF%BC%88%E6%97%B6%E9%97%B4%E5%8E%9F%E5%9B%A0%E6%B2%A1%E6%9C%89%E5%AE%9E%E8%B7%B5%EF%BC%89"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.4 其他边界条件修改（时间原因没有实践）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E4%BF%AE%E6%94%B9%E8%B5%A4%E9%81%93%E5%A4%AA%E5%B9%B3%E6%B4%8B%E6%B5%B7%E6%B8%A9%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.3.5.</span> <span class="toc-text">3.5 修改赤道太平洋海温条件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%90%8E%E8%AE%B0"><span class="toc-number">1.4.</span> <span class="toc-text">4. 后记</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新发布</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/01/research/paleomodel_learn/" title="第一届古气候模拟暑期学校实习记录"><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/paleomodel_learn/Summer_School_of_Paleoclimate_Simulation.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="第一届古气候模拟暑期学校实习记录"/></a><div class="content"><a class="title" href="/2025/08/01/research/paleomodel_learn/" title="第一届古气候模拟暑期学校实习记录">第一届古气候模拟暑期学校实习记录</a><time datetime="2025-07-31T16:00:00.000Z" title="发表于 2025-08-01 00:00:00">2025-08-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/31/index/" title="欢迎来到我的博客"><img src="https://raw.githubusercontent.com/Thor987/mypic/img/img/lake.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="欢迎来到我的博客"/></a><div class="content"><a class="title" href="/2025/07/31/index/" title="欢迎来到我的博客">欢迎来到我的博客</a><time datetime="2025-07-31T07:00:00.000Z" title="发表于 2025-07-31 15:00:00">2025-07-31</time></div></div></div></div></div></div></main><footer id="footer"><div class="footer-other"><div class="footer-copyright"><span class="copyright">&copy;&nbsp;2025 By 李朋发</span><span class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo 7.3.0</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly 5.4.3</a></span></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
